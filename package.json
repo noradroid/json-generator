@@ -1,0 +1,21 @@
+{
+  "name": "json-generator",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "nodemon ./src/main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "noradroid",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2"
+  }
+}
