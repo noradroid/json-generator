@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "debug": "nodemon ./src/main.ts",
-    "start": "node ./dist/index.js",
+    "build": "npx webpack",
+    "start": "npm run build && node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "noradroid",
