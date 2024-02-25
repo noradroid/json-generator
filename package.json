@@ -7,6 +7,7 @@
     "debug": "nodemon ./src/main.ts",
     "build": "npx webpack",
     "start": "npm run build && node ./dist/index.js",
+    "vercel-build": "npx webpack --config ./webpack.vercel.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "noradroid",
