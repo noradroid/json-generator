@@ -1,39 +1,53 @@
 # JSON Generator
 
-Generate JSON data by passing in field name and type.
+Generate JSON data by passing in a schema.
 
 Curl request:
 
 ```bash
-curl --location 'https://json-generator-gilt.vercel.app/generate' \
+curl --location 'http://localhost:3000/generate' \
 --header 'Content-Type: application/json' \
 --data '{
-    "size": 5,
-    "fields": [
-        {
-            "type": "id",
-            "name": "id"
-        },
-        {
-            "type": "amount",
-            "name": "amountDefault"
-        },
-        {
-            "type": "amount",
-            "name": "amountOther"
-        },
-        {
-            "type": "name",
-            "name": "name"
-        },
-        {
-            "type": "description",
-            "name": "description"
-        },
-        {
-            "type": "date",
-            "name": "date"
-        }
-    ]
+    "type": "[]",
+    "size": 3,
+    "elementSchema": {
+        "type": "{}",
+        "propertySchemas": [
+            {
+                "type": "date",
+                "name": "date"
+            },
+            {
+                "type": "[]",
+                "name": "expenses",
+                "size": "3",
+                "elementSchema": {
+                    "type": "{}",
+                    "propertySchemas": [
+                        {
+                            "type": "id",
+                            "name": "id"
+                        },
+                        {
+                            "type": "name",
+                            "name": "name"
+                        },
+                        {
+                            "type": "description",
+                            "name": "description"
+                        },
+                        {
+                            "type": "amount",
+                            "name": "amountDefault"
+                        },
+                        {
+                            "type": "amount",
+                            "name": "amountOther"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
 }'
 ```
