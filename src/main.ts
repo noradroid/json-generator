@@ -2,8 +2,7 @@ import type { Request } from "express";
 import * as express from "express";
 import { DataGenerator } from "./data-generator";
 import { Obj } from "./models/obj.model";
-import { Request as Request_ } from "./models/request.model";
-import { ObjBuilder } from "./obj-builder";
+import { SchemaDefinition } from "./models/schema-definition.model";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,16 +15,34 @@ app.listen(port, () => {
 
 const dg: DataGenerator = new DataGenerator();
 
-app.post("/generate", (request: Request<{}, {}, Request_, {}>, response) => {
-  const { size, fields } = request.body;
-  const results: Obj[] = [];
-  for (let i = 0; i < size; ++i) {
-    const objBuilder: ObjBuilder = new ObjBuilder(dg);
-    fields.forEach((field) => {
-      objBuilder.addProperty(field);
-    });
-    results.push(objBuilder.build());
-  }
+app.post(
+  "/generate",
+  (request: Request<{}, {}, SchemaDefinition, {}>, response) => {
+    const schema: SchemaDefinition = request.body;
+    const results = buildObj(schema);
 
-  response.send(results);
-});
+    response.send(results);
+  }
+);
+
+const buildObj = (schema: SchemaDefinition): Obj => {
+  switch (schema.type) {
+    case "{}": {
+      const intermediate: Obj = {};
+      schema.propertySchemas.forEach((field) => {
+        intermediate[field.name] = buildObj(field);
+      });
+      return intermediate;
+    }
+    case "[]": {
+      const intermediate: Obj = [];
+      for (let i = 0; i < schema.size; ++i) {
+        intermediate.push(buildObj(schema.elementSchema));
+      }
+      return intermediate;
+    }
+    default: {
+      return dg.generate(schema.type);
+    }
+  }
+};
