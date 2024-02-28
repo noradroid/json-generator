@@ -30,42 +30,45 @@ type NamelessDataDefinition = Omit<DataDefinition, "name">;
 type NamelessArrayDefinition = Omit<ArrayDefinition, "name">;
 type NamelessObjectDefinition = Omit<ObjectDefinition, "name">;
 
-export type Definition =
-  | NamelessDataDefinition
-  | NamelessArrayDefinition
-  | NamelessObjectDefinition;
-
-const def: Definition = {
+const SAMPLE_SCHEMA: SchemaDefinition = {
   type: "[]",
-  size: 5,
+  size: 3,
   elementSchema: {
     type: "{}",
     propertySchemas: [
       {
-        type: "id",
-        name: "id",
-      },
-      {
-        type: "name",
-        name: "name",
-      },
-      {
-        type: "{}",
-        name: "information",
-        propertySchemas: [
-          {
-            type: "name",
-            name: "otherName",
-          },
-        ],
+        type: "date",
+        name: "date",
       },
       {
         type: "[]",
         name: "expenses",
+        size: 3,
         elementSchema: {
-          type: "amount",
+          type: "{}",
+          propertySchemas: [
+            {
+              type: "id",
+              name: "id",
+            },
+            {
+              type: "name",
+              name: "name",
+            },
+            {
+              type: "description",
+              name: "description",
+            },
+            {
+              type: "amount",
+              name: "amountDefault",
+            },
+            {
+              type: "amount",
+              name: "amountOther",
+            },
+          ],
         },
-        size: 40,
       },
     ],
   },
