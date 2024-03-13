@@ -1,11 +1,14 @@
 import type { Request } from "express";
 import * as express from "express";
+import * as cors from "cors";
 import { DataGenerator } from "./data-generator";
 import { Obj } from "./models/obj.model";
 import { SchemaDefinition } from "./models/schema-definition.model";
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.options("*", cors()); // include before other routes
 
 app.use(express.json());
 
