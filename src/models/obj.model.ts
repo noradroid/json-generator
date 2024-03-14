@@ -6,5 +6,3 @@ export type Obj =
     }
   | Obj[]
   | DataType;
-
-export type IntermediateObj = Obj | DataType;
