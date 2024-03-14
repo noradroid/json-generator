@@ -50,5 +50,3 @@ const buildObj = (schema: SchemaDefinition): Obj => {
     }
   }
 };
-
-module.exports = app;
