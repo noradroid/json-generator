@@ -1,9 +1,3 @@
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
 /*!
  * accepts
  * Copyright(c) 2014 Jonathan Ong
