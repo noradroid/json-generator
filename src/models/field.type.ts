@@ -1,4 +1,12 @@
-const fieldTypes = ["name", "date", "amount", "description", "id"] as const;
+const fieldTypes = [
+  "string",
+  "number",
+  "name",
+  "date",
+  "amount",
+  "description",
+  "id",
+] as const;
 
 export type FieldType = (typeof fieldTypes)[number];
 
